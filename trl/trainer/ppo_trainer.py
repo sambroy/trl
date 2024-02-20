@@ -14,6 +14,9 @@
 import logging
 logging.basicConfig(level=logging.INFO)
 
+import mlflow
+mlflow.autolog()
+
 import inspect
 import math
 import os
@@ -58,9 +61,6 @@ from ..core import (
 from ..import_utils import is_npu_available, is_torch_greater_2_0, is_xpu_available
 from ..models import SUPPORTED_ARCHITECTURES, PreTrainedModelWrapper, create_reference_model
 from . import AdaptiveKLController, BaseTrainer, FixedKLController, PPOConfig, RunningMoments
-
-import mlflow
-mlflow.autolog()
 
 if is_deepspeed_available():
     import deepspeed
