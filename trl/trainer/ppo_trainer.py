@@ -11,6 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import logging
+logging.basicConfig(level=logging.INFO)
+
 import inspect
 import math
 import os
@@ -55,6 +58,9 @@ from ..core import (
 from ..import_utils import is_npu_available, is_torch_greater_2_0, is_xpu_available
 from ..models import SUPPORTED_ARCHITECTURES, PreTrainedModelWrapper, create_reference_model
 from . import AdaptiveKLController, BaseTrainer, FixedKLController, PPOConfig, RunningMoments
+
+import mlflow
+mlflow.autolog()
 
 
 if is_deepspeed_available():
