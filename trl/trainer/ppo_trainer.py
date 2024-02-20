@@ -61,10 +61,6 @@ from . import AdaptiveKLController, BaseTrainer, FixedKLController, PPOConfig, R
 
 import mlflow
 mlflow.autolog()
-<<<<<<< HEAD
-
-=======
->>>>>>> 58e774a2ad55f489adb4d17dfc99e19f9e8ca5e2
 
 if is_deepspeed_available():
     import deepspeed
