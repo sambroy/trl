@@ -862,6 +862,9 @@ class PPOTrainer(BaseTrainer):
         if self.lr_scheduler is not None:
             self.lr_scheduler.step()
 
+        mlflow.log_params(stats)
+        mlflow.log_params(timing)
+
         return stats
 
     def _early_stop(self, policykl):
