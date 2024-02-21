@@ -826,6 +826,8 @@ class PPOTrainer(BaseTrainer):
         train_stats["policy/advantages"] = torch.nan_to_num(train_stats["policy/advantages"], WANDB_PADDING)
         train_stats["policy/ratio"] = torch.flatten(train_stats["policy/ratio"]).unsqueeze(0)
 
+
+
         stats = self.record_step_stats(
             scores=scores,
             logprobs=all_logprobs,
@@ -862,8 +864,7 @@ class PPOTrainer(BaseTrainer):
         if self.lr_scheduler is not None:
             self.lr_scheduler.step()
 
-        mlflow.log_params(stats)
-        mlflow.log_params(timing)
+        # mlflow.log_params(timing)
 
         return stats
 
@@ -1382,6 +1383,9 @@ class PPOTrainer(BaseTrainer):
             logs["env/reward_std"] = torch.std(rewards).cpu().numpy().item()
             logs["env/reward_dist"] = rewards.cpu().numpy()
 
+            # for key in logs:
+            #     print(f"{key}: {logs[key]}")
+
             if self.config.log_with == "tensorboard":
                 # update the current step
                 self.current_step += 1
@@ -1390,6 +1394,8 @@ class PPOTrainer(BaseTrainer):
                 logs,
                 step=self.current_step if self.config.log_with == "tensorboard" else None,
             )
+
+            # mlflow.log_params(logs)
 
     def create_model_card(self, path: str, model_name: Optional[str] = "TRL Model") -> None:
         """Creates and saves a model card for a TRL model.
